@@ -1,3 +1,5 @@
+#This is the code for Question 2 and Question 3.
+
 import matplotlib.pyplot as plt 
 import numpy as np 
 import math
@@ -53,6 +55,7 @@ class twoClassDistribution:
         x_12 = np.array(x_12)
         x_21 = np.array(x_21)
         x_22 = np.array(x_22)
+        self.errorCounter = len(x_12) + len(x_21)
         if flag_11 == 1:
             plt.scatter(x_11[:,0], x_11[:,1], c = 'g', marker='x', label='Decision 1, Label 1')
         if flag_22 == 1:    
@@ -125,6 +128,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_1.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 1', fontsize=15)
+    print('(Case 1)Number of errors:%d'%Case_1.errorCounter)
+    print('(Case 1)Probability of error:%f'%(Case_1.errorCounter/int(Case_1.N)))
+
     Case_1_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
@@ -143,6 +149,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_2.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 2', fontsize=15)
+    print('(Case 2)Number of errors:%d'%Case_2.errorCounter)
+    print('(Case 2)Probability of error:%f'%(Case_2.errorCounter/int(Case_2.N)))
+
     Case_2_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
@@ -161,6 +170,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_3.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 3', fontsize=15)
+    print('(Case 3)Number of errors:%d'%Case_3.errorCounter)
+    print('(Case 3)Probability of error:%f'%(Case_3.errorCounter/int(Case_3.N)))
+
     Case_3_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
@@ -179,6 +191,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_4.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 4', fontsize=15)
+    print('(Case 4)Number of errors:%d'%Case_4.errorCounter)
+    print('(Case 4)Probability of error:%f'%(Case_4.errorCounter/int(Case_4.N)))
+
     Case_4_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
@@ -197,6 +212,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_5.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 5', fontsize=15)
+    print('(Case 5)Number of errors:%d'%Case_5.errorCounter)
+    print('(Case 5)Probability of error:%f'%(Case_5.errorCounter/int(Case_5.N)))
+
     Case_5_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
@@ -215,6 +233,9 @@ if __name__ == '__main__':
     plt.subplot(212)
     Case_6.plotEstimatedLabel(x_1, x_2)
     plt.title('Scatter of Decision Labels for Case 6', fontsize=15)
+    print('(Case 6)Number of errors:%d'%Case_6.errorCounter)
+    print('(Case 6)Probability of error:%f'%(Case_6.errorCounter/int(Case_6.N)))
+
     Case_6_LDA = FisherLDAClassifier(x_1,x_2)
     plt.figure()
     plt.subplot(211)
