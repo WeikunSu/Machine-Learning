@@ -16,8 +16,10 @@ class twoClassDistribution:
         self.Pr_2 = Pr_2
     
     def generateRandomVector(self):
-        N_1 = int(self.N * self.Pr_1 + 0.5)
-        N_2 = int(self.N * self.Pr_2 + 0.5)
+        N_1 = np.count_nonzero(np.random.rand(self.N) <= self.Pr_1)
+        N_2 = self.N - N_1
+        # N_1 = int(self.N * self.Pr_1 + 0.5)
+        # N_2 = int(self.N * self.Pr_2 + 0.5)
         A_1 = np.linalg.cholesky(self.Sigma_1)
         A_2 = np.linalg.cholesky(self.Sigma_2)
         x_1 = np.dot(A_1, np.random.randn(2,N_1)) + np.dot(self.mu_1, np.ones([1,N_1]))
