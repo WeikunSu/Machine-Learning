@@ -55,7 +55,8 @@ for i in sigma_prior:                          # set the range of our sigma_prio
     for j in range(num_experiment):      
         x, y, X_mat = sampleGenerater(N, sigma_noise, W_true)
         W_est = scipy.optimize.fmin(MAPscore, np.array([1,0,0,0]), disp=False)
-        error_L2[j] = sqrt(np.dot(np.transpose(W_est - W_true), W_est - W_true))
+        # error_L2[j] = sqrt(np.dot(np.transpose(W_est - W_true), W_est - W_true))
+        error_L2[j] = np.dot(np.transpose(W_est - W_true), W_est - W_true)
     error_L2_sorted = sorted(error_L2)
     err_min[counter] = error_L2_sorted[0]
     err_25[counter] = error_L2_sorted[int (0.25*num_experiment-1)]
@@ -63,17 +64,17 @@ for i in sigma_prior:                          # set the range of our sigma_prio
     err_75[counter] = error_L2_sorted[int(0.75*num_experiment-1)]
     err_max[counter] = error_L2_sorted[num_experiment-1]
     counter += 1
-plt.semilogx(sigma_prior, err_min, label = 'minimun value')
-plt.semilogx(sigma_prior, err_25, label = '25% value')
-plt.semilogx(sigma_prior, err_median, label = 'median value')
-plt.semilogx(sigma_prior, err_75, label = '75% value')
-plt.semilogx(sigma_prior, err_max, label = 'maximun value')
+# plt.semilogx(sigma_prior, err_min, label = 'minimun value')
+# plt.semilogx(sigma_prior, err_25, label = '25% value')
+# plt.semilogx(sigma_prior, err_median, label = 'median value')
+# plt.semilogx(sigma_prior, err_75, label = '75% value')
+# plt.semilogx(sigma_prior, err_max, label = 'maximun value')
 
-# plt.loglog(sigma_prior, err_min, label = 'minimun value')
-# plt.loglog(sigma_prior, err_25, label = '25% value')
-# plt.loglog(sigma_prior, err_median, label = 'median value')
-# plt.loglog(sigma_prior, err_75, label = '75% value')
-# plt.loglog(sigma_prior, err_max, label = 'maximun value')
+plt.loglog(sigma_prior, err_min, label = 'minimun value')
+plt.loglog(sigma_prior, err_25, label = '25% value')
+plt.loglog(sigma_prior, err_median, label = 'median value')
+plt.loglog(sigma_prior, err_75, label = '75% value')
+plt.loglog(sigma_prior, err_max, label = 'maximun value')
 
 plt.legend(fontsize = 20)
 plt.xlabel(r'$\gamma$', fontsize = 20)
