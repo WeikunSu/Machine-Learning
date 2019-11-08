@@ -121,7 +121,7 @@ if __name__ == "__main__":
     index_partition_limit = np.zeros([K,2])
     for k in range(K):
         index_partition_limit[k,:] = [dummy[k],dummy[k+1]-1]
-    C_gaussian_list = 10**(np.linspace(-3,2, 6))
+    C_gaussian_list = 10**(np.linspace(-3,4, 8))
     Sigma_list = 10**(np.linspace(-2,2,5))
     P_error_mean = np.zeros((len(Sigma_list),len(C_gaussian_list)))
     for j in range(len(Sigma_list)):
