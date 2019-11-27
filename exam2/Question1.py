@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
 
     ## Part 3 ##############################
-    N_list = [100,1000,10000,100000]
+    N_list = [100, 1000, 10000]
     K = 10
     fig_3 = plt.figure('model order select')
     ax_3 = plt.subplot(111)
@@ -105,7 +105,7 @@ if __name__ == "__main__":
         index_partition_limit = np.zeros([K,2])
         for k in range(K):
             index_partition_limit[k,:] = [dummy[k],dummy[k+1]-1]
-        num_node_list = 10**(np.linspace(1, 4, 4))
+        num_node_list = [5, 10, 20, 40, 60, 80, 100]
         P_correct_mean = np.zeros((len(num_node_list,)))
         for i in range(len(num_node_list)):
             print(i,len(num_node_list))
@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 model.compile(optimizer='sgd',
                     loss='sparse_categorical_crossentropy',
                     metrics=['accuracy'])
-                model.fit(x_train,L_train,epochs=5,verbose=0)
+                model.fit(x_train,L_train,epochs=100,verbose=0)
                 pre_MLP = model.predict(x_validate)
                 D_MLP = np.argmax(pre_MLP[:],axis=1)
                 P_correct[k] = np.count_nonzero(D_MLP == L_validate) / N_MLP
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
         #plot the searching process
         
-        ax_3.semilogx(num_node_list, P_correct_mean, marker='x', label='N = %d'%N_MLP)
+        ax_3.plot(num_node_list, P_correct_mean, marker='x', label='N = %d'%N_MLP)
     ax_3.set_title('The performance of optimizer with different number of nodes',fontsize=20)
     ax_3.set_xlabel('Number of nodes', fontsize=20)
     ax_3.set_ylabel('Probability of correct decisions', fontsize=20)
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     model.compile(optimizer='sgd',
         loss='sparse_categorical_crossentropy',
         metrics=['accuracy'])
-    model.fit(x_MLP,L_MLP,epochs=5,verbose=0)
+    model.fit(x_MLP,L_MLP,epochs=100,verbose=0)
     pre_MLP = model.predict(x_test)
     D_MLP = np.argmax(pre_MLP[:],axis=1)
     P_error_MLP = np.count_nonzero(D_MLP != L_test) / N_test
@@ -165,7 +165,7 @@ if __name__ == "__main__":
     labellist = ['D_MLP=1','D_MLP=2','D_MLP=3','D_MLP=4']
     for i in range(len(prior)):
         ax_4.scatter(x_test[np.where(D_MLP == i),0],x_test[np.where(D_MLP == i),1],x_test[np.where(D_MLP == i),2],marker='o', c=clist[i], label= labellist[i])
-    ax_4.set_title('Part 3: 10000 samples classified by multilayer perceptron neural network \n Probability of error:%f'%P_error_MLP,fontsize=20)
+    ax_4.set_title('Part 3: 10000 samples classified by multilayer perceptron neural network \n Number of nodes(selected one):%d \n Probability of error:%f'%(num_node_best, P_error_MLP),fontsize=20)
     ax_4.legend(fontsize=20)
 
 

@@ -71,7 +71,7 @@ if __name__ == "__main__":
         index_partition_limit[k,:] = [dummy[k],dummy[k+1]-1]
     
     act_list = ['sigmoid','softplus']            ##['sigmoid','softplus']
-    num_node_list = 10**(np.linspace(1, 3, 5))
+    num_node_list = [5,10,15,20,25]
     mse_mean = np.zeros((len(act_list), len(num_node_list,)))
 
     for j in range(len(act_list)):
@@ -95,7 +95,7 @@ if __name__ == "__main__":
                 model.compile(optimizer='adam',
                             loss='mse',
                             metrics=['mse'])
-                model.fit(x_train_k[:,0],x_train_k[:,1],epochs=100,verbose=0)
+                model.fit(x_train_k[:,0],x_train_k[:,1],epochs=1000,verbose=0)
                 x_pre = model.predict(x_validate[:,0])
                 mse[k] = np.mean((x_pre.reshape(1,-1) - x_validate[:,1])**2)
             mse_mean[j,i] = np.mean(mse)
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     ## plot the process of model selection
     plt.figure('K-fold result')
     for j in range(len(act_list)):
-        plt.semilogx(num_node_list, mse_mean[j,:], marker='x', label = act_list[j])
+        plt.plot(num_node_list, mse_mean[j,:], marker='x', label = act_list[j])
     plt.title('C.V. process of model selection \n num_node_best = %d, act_best = %s'%(num_node_best,act_best), fontsize=20)
     plt.xlabel('number of nodes',fontsize=20)
     plt.ylabel('MSE',fontsize=20)
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     model.compile(optimizer='adam',
                 loss='mse',
                 metrics=['mse'])
-    model.fit(x_train[:,0],x_train[:,1],epochs=100,verbose=0)
+    model.fit(x_train[:,0],x_train[:,1],epochs=1000,verbose=0)
     x_pre = model.predict(x_test[:,0])
     mse = np.mean((x_pre.reshape(1,-1) - x_test[:,1])**2)
 
